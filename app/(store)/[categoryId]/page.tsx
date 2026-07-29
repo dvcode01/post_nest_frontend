@@ -1,3 +1,4 @@
+import { CategoryWithProductsResponseSchema } from "@/app/src/schemas/schemas";
 
 type params = Promise<{categoryId: string}>;
 
@@ -6,14 +7,18 @@ async function getProducts(categoryId: string){
     const req = await fetch(url);
 
     const json = await req.json();
-    return json;
+    const products = CategoryWithProductsResponseSchema.safeParse(json);
+
+    return products;
 }
 
 export default async function StorePage({params}: {params: params}) {
     const { categoryId } = await params;
-    const products = await getProducts(categoryId);
+    const category = await getProducts(categoryId);
     
     return (
-        <div>StorePage {categoryId}</div>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+            
+        </div>
     )
 }
