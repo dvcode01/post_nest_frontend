@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { Product } from "../schemas/schemas";
-import { formatCurrency } from "../utils/currency";
+import { Product } from "../../schemas/schemas";
+import { formatCurrency } from "../../utils/currency";
 
 export default function ProductCard({product}: {product: Product}) {
     return (

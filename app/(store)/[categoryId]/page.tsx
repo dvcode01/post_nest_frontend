@@ -1,4 +1,4 @@
-import ProductCard from "@/app/src/components/ProductCard";
+import ProductCard from "@/app/src/components/products/ProductCard";
 import { CategoryWithProductsResponseSchema } from "@/app/src/schemas/schemas";
 
 type params = Promise<{categoryId: string}>;
