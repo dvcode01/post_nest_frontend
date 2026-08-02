@@ -8,6 +8,7 @@ interface store {
     addToCart: (product: Product) => void;
     updateQuantity: (id: Product['id'], quantity: number) => void;
     removeFromCart: (id: Product['id']) => void;
+    calculateTotal: () => void;
 };
 
 export const useStore = create<store>()(devtools((set, get) => ({
@@ -39,16 +40,29 @@ export const useStore = create<store>()(devtools((set, get) => ({
         set(() => ({
             contents
         }));
+
+        this.calculateTotal();
     },
     updateQuantity(id, quantity){
         const contents = get().contents.map(item => item.productId === id ? {...item, quantity} : item);
         set(() => ({
             contents
         }));
+
+        this.calculateTotal();
     },
     removeFromCart(id){
         set((state) => ({
             contents: state.contents.filter(item => item.productId !== id)
+        }));
+
+        this.calculateTotal();
+    },
+    calculateTotal(){
+        const total = get().contents.reduce((total, item) => total + (item.price * item.quantity), 0);
+
+        set(() => ({
+            total
         }));
     }
 })));
