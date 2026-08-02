@@ -1,14 +1,17 @@
 import { create } from "zustand";
-import { Product } from "../schemas/schemas";
+import { devtools } from "zustand/middleware";
+import { Product, ShoppingCart } from "../schemas/schemas";
 
 interface store {
     total: number;
     addToCart: (product: Product) => void;
+    contents: ShoppingCart;
 };
 
-export const useStore = create<store>(() => ({
+export const useStore = create<store>()(devtools(() => ({
     total: 0,
+    contents: [],
     addToCart(product) {
         console.log(product);
     },
-}));
+})));
