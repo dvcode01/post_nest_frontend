@@ -41,7 +41,7 @@ export const useStore = create<store>()(devtools((set, get) => ({
             contents
         }));
 
-        this.calculateTotal();
+        get().calculateTotal();
     },
     updateQuantity(id, quantity){
         const contents = get().contents.map(item => item.productId === id ? {...item, quantity} : item);
@@ -49,14 +49,14 @@ export const useStore = create<store>()(devtools((set, get) => ({
             contents
         }));
 
-        this.calculateTotal();
+        get().calculateTotal();
     },
     removeFromCart(id){
         set((state) => ({
             contents: state.contents.filter(item => item.productId !== id)
         }));
 
-        this.calculateTotal();
+        get().calculateTotal();
     },
     calculateTotal(){
         const total = get().contents.reduce((total, item) => total + (item.price * item.quantity), 0);
