@@ -2,6 +2,7 @@
 
 import { useStore } from "../../stores/store";
 import Amount from "./Amount";
+import CouponForm from "./CouponForm";
 import ShoppingCartItem from "./ShoppingCartItem";
 
 export default function ShoppingCart() {
@@ -30,6 +31,8 @@ export default function ShoppingCart() {
                                 amount={total}
                             />
                         </dl>
+
+                        <CouponForm />
                     </>
                 ) :
                 (
