@@ -4,8 +4,9 @@ import { Product, ShoppingCart } from "../schemas/schemas";
 
 interface store {
     total: number;
-    addToCart: (product: Product) => void;
     contents: ShoppingCart;
+    addToCart: (product: Product) => void;
+    updateQuantity: (id: Product['id'], quantity: number) => void;
 };
 
 export const useStore = create<store>()(devtools((set, get) => ({
@@ -38,4 +39,10 @@ export const useStore = create<store>()(devtools((set, get) => ({
             contents
         }));
     },
+    updateQuantity(id, quantity){
+        const contents = get().contents.map(item => item.productId === id ? {...item, quantity} : item);
+        set(() => ({
+            contents
+        }));
+    }
 })));
