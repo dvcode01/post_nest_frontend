@@ -8,17 +8,26 @@ export default function ShoppingCart() {
 
     return (
         <>
-            <h2 className="text-4xl font-bold text-gray-900">
-                Resumen de venta
-            </h2>
+            {
+                contents.length ? (
+                    <>
+                        <h2 className="text-4xl font-bold text-gray-900">
+                            Resumen de venta
+                        </h2>
 
-            <ul role="list" className="mt-6 divide-y divide-gray-200 border-t border-gray-200 text-sm font-medium text-gray-500">
-                {contents.map(item => (
-                    <ShoppingCartItem
-                        key={item.productId} 
-                        item={item} />
-                ))}
-            </ul>
+                        <ul role="list" className="mt-6 divide-y divide-gray-200 border-t border-gray-200 text-sm font-medium text-gray-500">
+                            {contents.map(item => (
+                                <ShoppingCartItem
+                                    key={item.productId} 
+                                    item={item} />
+                            ))}
+                        </ul>
+                    </>
+                ) :
+                (
+                    <p className="text-center text-xl text-gray-900">El carrito esta vacío</p>
+                )
+            }
         </>
     )
 }
