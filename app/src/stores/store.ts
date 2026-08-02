@@ -8,10 +8,34 @@ interface store {
     contents: ShoppingCart;
 };
 
-export const useStore = create<store>()(devtools(() => ({
+export const useStore = create<store>()(devtools((set, get) => ({
     total: 0,
     contents: [],
     addToCart(product) {
-        console.log(product);
+        const { id: productId, ...data } = product;
+        let contents: ShoppingCart = [];
+        const duplicated = get().contents.findIndex(item => item.productId === productId);
+
+        if(duplicated >= 0){
+            if(get().contents[duplicated].quantity >= get().contents[duplicated].inventory) return;
+
+            contents = get().contents.map(elem => elem.productId === productId ? {
+                ...elem,
+                quantity: elem.quantity + 1 
+            } : elem);
+
+        }else{
+            contents = [
+                ...get().contents, {
+                    ...data,
+                    quantity: 1,
+                    productId
+                }
+            ];
+        }
+        
+        set(() => ({
+            contents
+        }));
     },
 })));
