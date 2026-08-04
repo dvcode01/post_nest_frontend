@@ -9,6 +9,7 @@ interface store {
     updateQuantity: (id: Product['id'], quantity: number) => void;
     removeFromCart: (id: Product['id']) => void;
     calculateTotal: () => void;
+    applyCoupon: (couponName: string) => Promise<void>;
 };
 
 export const useStore = create<store>()(devtools((set, get) => ({
@@ -64,5 +65,8 @@ export const useStore = create<store>()(devtools((set, get) => ({
         set(() => ({
             total
         }));
-    }
+    },
+    async applyCoupon(couponName) {
+        console.log('desde apply coupon');
+    },
 })));

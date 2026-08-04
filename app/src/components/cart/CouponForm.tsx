@@ -1,11 +1,16 @@
 import { SubmitEvent } from "react";
+import { useStore } from "../../stores/store";
 
 export default function CouponForm() {
-    const handleSubmit = (e: SubmitEvent<HTMLFormElement>) => {
+    const applyCoupon = useStore(state => state.applyCoupon);
+
+    const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
-        const couponName = formData.get('coupon_name');
+        const couponName = formData.get('coupon_name')?.toString()!;
+
+        await applyCoupon(couponName);
     }
 
     return (
