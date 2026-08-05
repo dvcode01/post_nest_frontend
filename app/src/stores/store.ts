@@ -1,10 +1,11 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { CounponResponseSchema, Product, ShoppingCart } from "../schemas/schemas";
+import { CounponResponseSchema, Coupon, Product, ShoppingCart } from "../schemas/schemas";
 
 interface store {
     total: number;
     contents: ShoppingCart;
+    coupon: Coupon;
     addToCart: (product: Product) => void;
     updateQuantity: (id: Product['id'], quantity: number) => void;
     removeFromCart: (id: Product['id']) => void;
@@ -15,6 +16,11 @@ interface store {
 export const useStore = create<store>()(devtools((set, get) => ({
     total: 0,
     contents: [],
+    coupon: {
+        name: '',
+        percentage: 0,
+        message: ''
+    },
     addToCart(product) {
         const { id: productId, ...data } = product;
         let contents: ShoppingCart = [];
@@ -76,6 +82,9 @@ export const useStore = create<store>()(devtools((set, get) => ({
 
         const json = await req.json();
         const coupon = CounponResponseSchema.parse(json);
-        console.log(coupon);
+        
+        set(() => ({
+            coupon
+        }));
     },
 })));
