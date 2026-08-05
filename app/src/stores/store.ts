@@ -4,6 +4,7 @@ import { CounponResponseSchema, Coupon, Product, ShoppingCart } from "../schemas
 
 interface store {
     total: number;
+    discount: number;
     contents: ShoppingCart;
     coupon: Coupon;
     addToCart: (product: Product) => void;
@@ -11,10 +12,12 @@ interface store {
     removeFromCart: (id: Product['id']) => void;
     calculateTotal: () => void;
     applyCoupon: (couponName: string) => Promise<void>;
+    applyDiscount: () => void;
 };
 
 export const useStore = create<store>()(devtools((set, get) => ({
     total: 0,
+    discount: 0,
     contents: [],
     coupon: {
         name: '',
@@ -71,6 +74,10 @@ export const useStore = create<store>()(devtools((set, get) => ({
         set(() => ({
             total
         }));
+
+        if(get().coupon.percentage){
+            get().applyDiscount();
+        }
     },
     async applyCoupon(couponName) {
         const req = await fetch('/coupons/api', {
@@ -85,6 +92,20 @@ export const useStore = create<store>()(devtools((set, get) => ({
         
         set(() => ({
             coupon
+        }));
+
+        if(coupon.percentage){
+            get().applyDiscount();
+        }
+    },
+    applyDiscount() {
+        const subTotalAmount = get().contents.reduce((total, item) => total + (item.price * item.quantity), 0);
+        const discount = (get().coupon.percentage / 100) * subTotalAmount;
+        const total = subTotalAmount - discount;
+
+        set(() => ({
+            total,
+            discount
         }));
     },
 })));
