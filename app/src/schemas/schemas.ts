@@ -30,6 +30,12 @@ const ContentsShoppingCartSchema = ProductSchema.pick({
     quantity: z.number()
 });
 
+export const CounponResponseSchema = z.object({
+    name: z.string().default(''),
+    message: z.string(),
+    percentage: z.coerce.number().max(100).min(0).default(0),
+});
+
 export const ShoppingCartSchema = z.array(ContentsShoppingCartSchema);
 
 export type Product = z.infer<typeof ProductSchema>;
