@@ -13,7 +13,8 @@ export default function SubmitOrderForm() {
         coupon
     };
 
-    const [state, dispatch] = useActionState(submitOrder, {
+    const submitOrderWithData = submitOrder.bind(null, order);
+    const [state, dispatch] = useActionState(submitOrderWithData, {
         errors: [],
         success: ''
     });
