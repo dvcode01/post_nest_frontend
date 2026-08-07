@@ -4,7 +4,7 @@ import { ErrorResponseSchema, OrderSchema, SuccessResponseSchema } from "@/app/s
 
 export async function submitOrder(data: unknown){
     const order = OrderSchema.parse(data);
-    const url = `${process.env.API_URL}/transations`;
+    const url = `${process.env.API_URL}/transactions`;
     const req = await fetch(url, {
         method: 'POST',
         headers: {
@@ -28,7 +28,7 @@ export async function submitOrder(data: unknown){
 
     return {
         errors: [],
-        success
+        success: success.message
     };
 }
 
