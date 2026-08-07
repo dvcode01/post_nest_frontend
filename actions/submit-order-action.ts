@@ -1,6 +1,7 @@
 "use server";
 
 import { ErrorResponseSchema, OrderSchema, SuccessResponseSchema } from "@/app/src/schemas/schemas";
+import { revalidateTag } from "next/cache";
 
 export async function submitOrder(data: unknown){
     const order = OrderSchema.parse(data);
@@ -10,7 +11,7 @@ export async function submitOrder(data: unknown){
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({...order})
+        body: JSON.stringify({...order}),
     });
 
     const json = await req.json();
@@ -25,6 +26,7 @@ export async function submitOrder(data: unknown){
     }
 
     const success = SuccessResponseSchema.parse(json);
+    revalidateTag('products-by-category', 'max');
 
     return {
         errors: [],
