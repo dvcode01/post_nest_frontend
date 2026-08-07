@@ -25,6 +25,10 @@ export default function SubmitOrderForm() {
             toast.success(state.success);
         }
 
+        if(state.errors){
+            state.errors.forEach(error => toast.error(error));
+        }
+
     }, [state]);
 
     return (
