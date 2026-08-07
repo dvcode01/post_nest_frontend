@@ -7,6 +7,7 @@ export default function SubmitOrderForm() {
     const total = useStore(state => state.total);
     const contents = useStore(state => state.contents);
     const coupon = useStore(state => state.coupon.name);
+    const clearOrder = useStore(state => state.clearOrder);
 
     const order = {
         total,
@@ -23,6 +24,7 @@ export default function SubmitOrderForm() {
     useEffect(() => {
         if(state.success){
             toast.success(state.success);
+            clearOrder();
         }
 
         if(state.errors){
