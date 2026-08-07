@@ -47,7 +47,7 @@ const OrderContentSchema = z.object({
 export const OrderSchema = z.object({
   total: z.number(),
   coupon: z.string(),
-  contents: z.array(OrderContentSchema).min(1, {message: 'El Carrito no puede ir vacio'})
+  contents: z.array(OrderContentSchema).min(1, {message: 'The cart cannot be empty'})
 });
 
 export type Product = z.infer<typeof ProductSchema>;
