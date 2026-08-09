@@ -1,5 +1,6 @@
 "use client";
 
+import { format } from "date-fns";
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -9,6 +10,8 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function TransactionFilter() {
     const [date, setDate] = useState<Value>(new Date());
+    const formattedDate = format(date?.toString()! || new Date(), 'yyyy-MM-dd');
+    console.log(formattedDate);
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-8">
