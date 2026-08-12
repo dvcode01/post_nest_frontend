@@ -1,6 +1,6 @@
 "use server";
 
-import { ErrorResponseSchema, OrderSchema, SuccessResponseSchema } from "@/app/src/schemas/schemas";
+import { ErrorResponseSchema, OrderSchema, SuccessResponseSchema } from "@/src/schemas/schemas";
 import { revalidateTag } from "next/cache";
 
 export async function submitOrder(data: unknown){

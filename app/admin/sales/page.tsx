@@ -1,5 +1,5 @@
-import TransactionFilter from '@/app/src/components/transactions/TransactionFilter'
-import Heading from '@/app/src/components/ui/Heading'
+import TransactionFilter from '@/src/components/transactions/TransactionFilter'
+import Heading from '@/src/components/ui/Heading'
 import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query'
 import { format } from 'date-fns';
 
