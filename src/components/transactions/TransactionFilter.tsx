@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import TransactionSummary from "./TransactionSummary";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -17,7 +18,6 @@ export default function TransactionFilter() {
         queryKey: ['sales', formattedDate],
         queryFn: () => getSalesbyDate(formattedDate)
     });
-    console.log(data)
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-8">
@@ -26,8 +26,13 @@ export default function TransactionFilter() {
             </div>
 
             <div className="">
-                {isLoading && <p>Cargando...</p>}
-                3
+                {isLoading && 'Cargando...'}
+
+                { data ? data.length ? data.map(transaction => (
+                    <TransactionSummary 
+                        key={transaction.id}
+                        transaction={transaction} />
+                )) : <p>No hay ventas en esta fecha</p> : null}
             </div>
         </div>
     )
