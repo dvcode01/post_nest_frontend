@@ -25,7 +25,7 @@ export default function TransactionFilter() {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-8 relative items-start">
             <div className="lg:sticky lg:top-10">
-                <Calendar onChange={setDate} value={date} />
+                <Calendar onChange={setDate} value={date} locale="es" />
             </div>
 
             <div className="">
