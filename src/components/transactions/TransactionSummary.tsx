@@ -6,7 +6,7 @@ export default function TransactionSummary({transaction}: {transaction: Transact
 
     return (
         <>
-            <div className='mt-6  text-sm font-medium text-gray-500 border border-gray-200'>
+            <div className='mt-6 lg:mt-0 text-sm font-medium text-gray-500 border border-gray-200'>
                 <p className='text-sm font-black text-gray-900 p-2 bg-gray-200 '>ID: {transaction.id}</p>
                 <ul
                     role="list"
