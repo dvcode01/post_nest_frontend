@@ -1,11 +1,11 @@
-import { TransactionResponseSchema } from "../schemas/schemas";
+import { TransactionsResponseSchema } from "../schemas/schemas";
 
 export async function getSalesbyDate(date: string){
     const url = `${process.env.NEXT_PUBLIC_DOMAIN}/admin/sales/api?transactionDate=${date}`;
     const req = await fetch(url);
 
     const json = await req.json();
-    const transactions = TransactionResponseSchema.parse(json);
+    const transactions = TransactionsResponseSchema.parse(json);
    
     return transactions;
 }
