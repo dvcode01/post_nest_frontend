@@ -1,7 +1,21 @@
-import React from 'react'
+import Heading from "@/src/components/ui/Heading";
+import { ProductsResponseApiSchema } from "@/src/schemas/schemas";
 
-export default function ProductsPage() {
+async function getProducts(){
+    const url = `${process.env.API_URL}/products`;
+    const req = await fetch(url);
+
+    const json = await req.json();
+    const products = ProductsResponseApiSchema.parse(json);
+    return products;
+}
+
+export default async function ProductsPage() {
+    await getProducts();
+
     return (
-        <div>ProductsPage</div>
+        <>
+            <Heading>Administrar Productos</Heading>
+        </>
     )
 }

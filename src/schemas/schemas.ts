@@ -8,6 +8,11 @@ export const ProductSchema = z.object({
   inventory: z.number(),
 })
 
+export const ProductsResponseApiSchema = z.object({
+  products: z.array(ProductSchema),
+  total: z.number()
+})
+
 export const CategorySchema = z.object({
   id: z.number(),
   name: z.string()
