@@ -1,9 +1,11 @@
 import ProductsTable from "@/src/components/products/ProductsTable";
 import Heading from "@/src/components/ui/Heading";
 import { ProductsResponseApiSchema } from "@/src/schemas/schemas";
+import { isValidPage } from "@/src/utils/validPage";
+import { redirect } from "next/navigation";
 
-async function getProducts(){
-    const url = `${process.env.API_URL}/products`;
+async function getProducts(take: number, skip: number){
+    const url = `${process.env.API_URL}/products?take=${take}&skip=${skip}`;
     const req = await fetch(url);
 
     const json = await req.json();
@@ -14,8 +16,16 @@ async function getProducts(){
     };
 }
 
-export default async function ProductsPage() {
-    const { products } = await getProducts();
+type SearchParams = Promise<{page: string}>;
+
+export default async function ProductsPage({searchParams}: {searchParams: SearchParams}) {
+    const { page } = await searchParams;
+    const productsPerPage: number = 10;
+
+    const skip = (+page - 1) * productsPerPage;
+    const { products, total } = await getProducts(productsPerPage, skip);
+
+    if(!isValidPage(+page)) redirect('/admin/products?page=1')
 
     return (
         <>
