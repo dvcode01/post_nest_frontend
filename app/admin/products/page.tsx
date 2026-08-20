@@ -22,10 +22,11 @@ export default async function ProductsPage({searchParams}: {searchParams: Search
     const { page } = await searchParams;
     const productsPerPage: number = 10;
 
+    if(!isValidPage(+page)) redirect('/admin/products?page=1')
+        
     const skip = (+page - 1) * productsPerPage;
     const { products, total } = await getProducts(productsPerPage, skip);
 
-    if(!isValidPage(+page)) redirect('/admin/products?page=1')
 
     return (
         <>
