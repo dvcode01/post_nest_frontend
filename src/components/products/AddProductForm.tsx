@@ -1,8 +1,23 @@
-import { ReactNode } from "react";
+"use client"
+
+import { addProduct } from "@/actions/add-product-action";
+import { ReactNode, useActionState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function AddProductForm({children}: {children: ReactNode}) {
+  const [state, dispatch] = useActionState(addProduct, {
+    errors: [],
+    success: ''
+  });
+
+  useEffect(() => {
+    if(state.errors){
+      state.errors.forEach(error => toast.error(error))
+    }
+  }, [state]);
+
   return (
-    <form>
+    <form action={dispatch}>
       {children}
 
       <input 
