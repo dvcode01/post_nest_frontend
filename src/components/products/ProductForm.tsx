@@ -1,6 +1,17 @@
+import { CategoriesResponseApiSchema } from "@/src/schemas/schemas";
 
+async function getCategories(){
+  const url = `${process.env.API_URL}/categories`;
+  const req = await fetch(url);
+  
+  const json = await req.json();
+  const categories = CategoriesResponseApiSchema.parse(json);
+  
+  return categories;
+}
 
 export default async function ProductForm() {
+  const categories = await getCategories();
 
   return (
     <>
@@ -59,7 +70,11 @@ export default async function ProductForm() {
           name="categoryId"
         >
           <option value="">Seleccionar Categoría</option>
-
+          {categories.map(category => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
         </select>
       </div>
 
