@@ -1,3 +1,5 @@
+import AddProductForm from "@/src/components/products/AddProductForm";
+import ProductForm from "@/src/components/products/ProductForm";
 import Heading from "@/src/components/ui/Heading";
 import Link from "next/link";
 
@@ -9,6 +11,10 @@ export default function NewProductPage() {
             </Link>
 
             <Heading>Nuevo Producto</Heading>
+
+            <AddProductForm >
+                <ProductForm />
+            </AddProductForm>
         </>
     )
 }
