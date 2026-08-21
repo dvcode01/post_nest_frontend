@@ -3,6 +3,7 @@ import Heading from "@/src/components/ui/Heading";
 import Pagination from "@/src/components/ui/Pagination";
 import { ProductsResponseApiSchema } from "@/src/schemas/schemas";
 import { isValidPage } from "@/src/utils/validPage";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function getProducts(take: number, skip: number){
@@ -34,6 +35,10 @@ export default async function ProductsPage({searchParams}: {searchParams: Search
 
     return (
         <>
+            <Link href={'/admin/products/new'} className="bg-green-400 rounded font-bold py-2 px-10">
+                Nuevo Producto
+            </Link>
+
             <Heading>Administrar Productos</Heading>
 
             <ProductsTable products={products} /> 
