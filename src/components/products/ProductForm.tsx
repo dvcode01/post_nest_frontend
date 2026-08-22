@@ -1,4 +1,4 @@
-import { CategoriesResponseApiSchema } from "@/src/schemas/schemas";
+import { CategoriesResponseApiSchema, Product } from "@/src/schemas/schemas";
 
 async function getCategories(){
   const url = `${process.env.API_URL}/categories`;
@@ -10,7 +10,7 @@ async function getCategories(){
   return categories;
 }
 
-export default async function ProductForm() {
+export default async function ProductForm({product}: {product?: Product}) {
   const categories = await getCategories();
 
   return (
@@ -26,6 +26,7 @@ export default async function ProductForm() {
           placeholder="Nombre Producto"
           className="border border-gray-300 w-full p-2"
           name="name"
+          defaultValue={product?.name}
         />
       </div>
 
@@ -41,6 +42,7 @@ export default async function ProductForm() {
           className="border border-gray-300 w-full p-2"
           name="price"
           min={0}
+          defaultValue={product?.price}
         />
       </div>
 
@@ -56,6 +58,7 @@ export default async function ProductForm() {
           className="border border-gray-300 w-full p-2"
           name="inventory"
           min={0}
+          defaultValue={product?.inventory}
         />
       </div>
 
