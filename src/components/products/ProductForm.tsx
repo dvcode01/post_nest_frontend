@@ -71,6 +71,7 @@ export default async function ProductForm({product}: {product?: Product}) {
           id="categoryId"
           className="border border-gray-300 w-full p-2 bg-white"
           name="categoryId"
+          defaultValue={product?.categoryId}
         >
           <option value="">Seleccionar Categoría</option>
           {categories.map(category => (
