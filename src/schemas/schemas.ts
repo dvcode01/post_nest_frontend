@@ -6,6 +6,7 @@ export const ProductSchema = z.object({
   image: z.string(),
   price: z.coerce.number(),
   inventory: z.number(),
+  categoryId: z.number()
 })
 
 export const ProductsResponseApiSchema = z.object({
