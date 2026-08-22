@@ -1,10 +1,12 @@
 "use client"
 
 import { addProduct } from "@/actions/add-product-action";
+import { useRouter } from "next/navigation";
 import { ReactNode, useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 export default function AddProductForm({children}: {children: ReactNode}) {
+  const router = useRouter();
   const [state, dispatch] = useActionState(addProduct, {
     errors: [],
     success: ''
@@ -17,6 +19,7 @@ export default function AddProductForm({children}: {children: ReactNode}) {
 
     if(state.success){
       toast.success(state.success);
+      router.push('/admin/products');
     }
   }, [state]);
 
