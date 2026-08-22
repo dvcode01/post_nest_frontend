@@ -1,15 +1,32 @@
 "use client"
 
-import { useRouter } from "next/navigation";
-import { ReactNode, useActionState } from "react";
+import { updateProduct } from "@/actions/update-product-action";
+import { useParams, useRouter } from "next/navigation";
+import { ReactNode, useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-export default function EditProductForm({children}: {children: ReactNode}) {
+export default function EditProductForm({ children }: { children: ReactNode }) {
   const router = useRouter();
- 
+  const { id } = useParams<{id: string}>();
+  const updateProductWithId = updateProduct.bind(null, +id);
+  const [state, dispatch] = useActionState(updateProductWithId, {
+    errors: [],
+    success: ''
+  });
+
+  useEffect(() => {
+      if(state.errors){
+        state.errors.forEach(error => toast.error(error))
+      }
+  
+      if(state.success){
+        toast.success(state.success);
+        router.push('/admin/products');
+      }
+    }, [state]);
 
   return (
-    <form>
+    <form action={dispatch} className="space-y-5">
       {children}
 
       <input
