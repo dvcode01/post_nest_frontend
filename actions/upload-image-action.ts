@@ -1,6 +1,6 @@
 "use server"
 
-export async function uploadImage(formData: FormData) {
+export async function uploadImage(formData: FormData) : Promise<string> {
     const url = `${process.env.API_URL}/products/upload-image`;
     const req = await fetch(url, {
         method: 'POST',
