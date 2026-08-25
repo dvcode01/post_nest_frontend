@@ -4,10 +4,22 @@ import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 export default function UploadProductImage() {
-    const onDrop = useCallback(() => {
-
+    const onDrop = useCallback(async (files: File[]) => {
+        const formdata = new FormData();
+        
+        files.forEach(file => {
+            formdata.append('file', file);
+        });
     }, []);
-    const { getRootProps, getInputProps, isDragActive, isDragReject, isDragAccept } = useDropzone({onDrop});
+
+    const { getRootProps, getInputProps, isDragActive, isDragReject, isDragAccept } = useDropzone({
+        accept: {
+            "image/jpeg": ['.jpg'],
+            "image/png": ['.png'],
+        },
+        onDrop,
+        maxFiles: 1
+    });
 
     return (
         <div className="space-y-1">
