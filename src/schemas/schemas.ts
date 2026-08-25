@@ -19,6 +19,7 @@ export const ProductFormSchema = z.object({
           .min(1, {message: 'The Product Name cannot be empty'}),
   price: z.coerce.number({message: 'Invalid price'})
           .min(1, {message: 'The Price must be greater than 0'}),
+  image: z.string({message: 'Image is required'}),
   inventory: z.coerce.number({message: 'Invalid Inventory'})
           .min(1, {message: 'The Inventory must be greater than 0'}),
   categoryId: z.coerce.number({message: 'The Category is not valid'})
