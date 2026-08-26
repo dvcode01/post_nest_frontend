@@ -3,6 +3,7 @@ import { formatCurrency } from "@/src/utils/currency"
 import Image from "next/image"
 import Link from "next/link"
 import DeleteProductForm from "./DeleteProductForm"
+import { getImagePath } from "@/src/utils/image"
 
 export default function ProductsTable({products}: {products: Product[]}) {
     return (
@@ -36,7 +37,7 @@ export default function ProductsTable({products}: {products: Product[]}) {
                                     <tr key={product.id}>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             <Image 
-                                                src={`${process.env.API_URL}/img/${product.image}`}
+                                                src={getImagePath(product.image)}
                                                 alt={`producto ${product.name}`}
                                                 width={120}
                                                 height={120}
