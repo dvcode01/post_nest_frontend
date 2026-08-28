@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Product } from "../../schemas/schemas";
 import { formatCurrency } from "../../utils/currency";
 import AddProductButton from "./AddProductButton";
+import { getImagePath } from "@/src/utils/image";
 
 export default function ProductCard({product}: {product: Product}) {
     return (
@@ -10,7 +11,7 @@ export default function ProductCard({product}: {product: Product}) {
         >
             <div>
                 <Image
-                    src={`${process.env.API_URL}/img/${product.image}`}
+                    src={getImagePath(product.image)}
                     alt={`Imagen del producto ${product.name}`}
                     width={400}
                     height={600}
