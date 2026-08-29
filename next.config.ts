@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: process.env.DOMAIN!, 
+        hostname: 'pos-nest-backend.onrender.com', 
       },
       {
         protocol: 'https',
