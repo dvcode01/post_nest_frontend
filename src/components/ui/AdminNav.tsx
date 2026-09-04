@@ -20,6 +20,11 @@ export default function AdminNav() {
                 >Ventas</Link>
 
                 <Link
+                    href={'/admin/coupons'}
+                    className="rounded text-white font-bold p-2"
+                >Cupones</Link>
+
+                <Link
                     href={'/'}
                     className="rounded bg-green-400 font-bold py-2 px-10"
                 >Tienda</Link>
