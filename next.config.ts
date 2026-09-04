@@ -6,10 +6,6 @@ const nextConfig: NextConfig = {
      unoptimized: true,
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: process.env.DOMAIN!,
-      },
-      {
         protocol: 'https',
         hostname: 'pos-nest-backend.onrender.com', 
       },
