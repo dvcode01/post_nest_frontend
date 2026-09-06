@@ -36,6 +36,15 @@ export const CategoryWithProductsResponseSchema = CategorySchema.extend({
   products: z.array(ProductSchema)
 });
 
+export const CouponSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  percentage: z.number(),
+  expirationDate: z.string()
+});
+
+export const CouponsResponseApiSchema = z.array(CouponSchema);
+
 /** Shopping Cart */
 const ContentsShoppingCartSchema = ProductSchema.pick({
   name: true,
