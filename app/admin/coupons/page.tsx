@@ -1,3 +1,4 @@
+import CouponsTable from "@/src/components/coupons/CouponsTable";
 import Heading from "@/src/components/ui/Heading";
 import { CouponsResponseApiSchema } from "@/src/schemas/schemas";
 
@@ -12,11 +13,12 @@ async function getCoupons(){
 
 export default async function CouponsPage() {
   const coupons = await getCoupons();
-  console.log(coupons);
 
   return (
     <>
       <Heading>Administra tus Cupones</Heading>
+
+      <CouponsTable coupons={coupons} />
     </>
   )
 }

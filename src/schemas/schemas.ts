@@ -108,5 +108,6 @@ export const TransactionsResponseSchema = z.array(TransactionResponseSchema);
 export type Product = z.infer<typeof ProductSchema>;
 export type ShoppingCart = z.infer<typeof ShoppingCartSchema>;
 export type CartItem = z.infer<typeof ContentsShoppingCartSchema>;
+export type Coupon = z.infer<typeof CouponSchema>;
 export type CouponValidation = z.infer<typeof CouponValidationResponseSchema>;
 export type Transaction = z.infer<typeof TransactionResponseSchema>;
