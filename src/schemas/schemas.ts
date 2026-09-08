@@ -16,13 +16,13 @@ export const ProductsResponseApiSchema = z.object({
 
 export const ProductFormSchema = z.object({
   name: z.string()
-          .min(1, {message: 'The Product Name cannot be empty'}),
-  price: z.coerce.number({message: 'Invalid price'})
-          .min(1, {message: 'The Price must be greater than 0'}),
-  image: z.string({message: 'Image is required'}),
-  inventory: z.coerce.number({message: 'Invalid Inventory'})
-          .min(1, {message: 'The Inventory must be greater than 0'}),
-  categoryId: z.coerce.number({message: 'The Category is not valid'})
+    .min(1, { message: 'The Product Name cannot be empty' }),
+  price: z.coerce.number({ message: 'Invalid price' })
+    .min(1, { message: 'The Price must be greater than 0' }),
+  image: z.string({ message: 'Image is required' }),
+  inventory: z.coerce.number({ message: 'Invalid Inventory' })
+    .min(1, { message: 'The Inventory must be greater than 0' }),
+  categoryId: z.coerce.number({ message: 'The Category is not valid' })
 })
 
 export const CategorySchema = z.object({
@@ -39,11 +39,26 @@ export const CategoryWithProductsResponseSchema = CategorySchema.extend({
 export const CouponSchema = z.object({
   id: z.number(),
   name: z.string(),
-  percentage: z.number(),
+  percentage: z.coerce.number(),
   expirationDate: z.string()
 });
 
 export const CouponsResponseApiSchema = z.array(CouponSchema);
+
+export const CouponFormSchema = z.object({
+  name: z.string()
+    .min(1, { message: 'The Coupon Name cannot be empty' }),
+  percentage: z.string()
+    .min(1, { message: 'The percentage is required' })
+    .transform(Number)
+    .pipe(
+      z.number()
+        .min(0, { message: 'The percentage cannot be negative' })
+        .max(100, { message: 'The percentage cannot be greater than 100' })
+    ),
+  expirationDate: z.string()
+    .min(1, { message: 'The date is required' })
+});
 
 /** Shopping Cart */
 const ContentsShoppingCartSchema = ProductSchema.pick({
