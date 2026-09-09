@@ -35,7 +35,7 @@ export default async function EditCouponPage({params}: {params: Params}) {
             <Heading>Editar Cupón: {coupon.name}</Heading>
 
             <EditCouponForm>
-                <CouponForm />
+                <CouponForm coupon={coupon} />
             </EditCouponForm>
 
         </>

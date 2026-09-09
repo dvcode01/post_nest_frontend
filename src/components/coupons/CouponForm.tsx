@@ -1,5 +1,6 @@
+import { Coupon } from "@/src/schemas/schemas";
 
-export default function CouponForm() {
+export default function CouponForm({coupon}: {coupon?: Coupon}) {
     return (
         <>
             <div className="space-y-2 ">
@@ -13,6 +14,7 @@ export default function CouponForm() {
                     placeholder="Nombre Cupón"
                     className="border border-gray-300 w-full p-2"
                     name="name"
+                    defaultValue={coupon?.name}
                 />
             </div>
 
@@ -28,6 +30,7 @@ export default function CouponForm() {
                     className="border border-gray-300 w-full p-2"
                     name="percentage"
                     min={0}
+                    defaultValue={coupon?.percentage}
                 />
             </div>
 
@@ -40,7 +43,8 @@ export default function CouponForm() {
                     type="date" 
                     name="expirationDate" 
                     id="expirationDate" 
-                    className="border border-gray-300 w-full p-2"/>
+                    className="border border-gray-300 w-full p-2"
+                    defaultValue={coupon?.expirationDate}/>
             </div>
         </>
     )
