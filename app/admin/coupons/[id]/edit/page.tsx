@@ -1,3 +1,5 @@
+import CouponForm from "@/src/components/coupons/CouponForm";
+import EditCouponForm from "@/src/components/coupons/EditCouponForm";
 import Heading from "@/src/components/ui/Heading";
 import { CouponSchema } from "@/src/schemas/schemas";
 import Link from "next/link";
@@ -31,6 +33,10 @@ export default async function EditCouponPage({params}: {params: Params}) {
             </Link>
 
             <Heading>Editar Cupón: {coupon.name}</Heading>
+
+            <EditCouponForm>
+                <CouponForm />
+            </EditCouponForm>
 
         </>
     )
