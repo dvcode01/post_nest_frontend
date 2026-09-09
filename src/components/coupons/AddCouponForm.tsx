@@ -1,10 +1,12 @@
 "use client"
 
 import { addCoupon } from "@/actions/add-coupon-action";
+import { useRouter } from "next/navigation";
 import { ReactNode, useActionState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 export default function AddCouponForm({ children }: { children: ReactNode }) {
+    const router = useRouter();
     const [state, dispatch] = useActionState(addCoupon, {
         errors: [],
         success: ''        
@@ -13,6 +15,11 @@ export default function AddCouponForm({ children }: { children: ReactNode }) {
     useEffect(() => {
         if(state.errors){
             state.errors.forEach(error => toast.error(error))
+        }
+
+        if(state.success){
+            toast.success(state.success);
+            router.push('/admin/coupons');
         }
 
     }, [state]);
