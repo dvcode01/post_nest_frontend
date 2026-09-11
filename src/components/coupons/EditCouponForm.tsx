@@ -1,9 +1,17 @@
-import { ReactNode } from "react";
+"use client"
+
+import { updateCoupon } from "@/actions/update-coupon-action";
+import { ReactNode, useActionState } from "react";
 
 export default function EditCouponForm({ children }: { children: ReactNode }) {
+    const [state, dispatch] = useActionState(updateCoupon, {
+        errors: [],
+        success: ''
+    });
+    
     return (
         <>
-            <form>
+            <form action={dispatch}>
                 {children}
 
                 <input
