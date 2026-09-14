@@ -16,13 +16,13 @@ export const ProductsResponseApiSchema = z.object({
 
 export const ProductFormSchema = z.object({
   name: z.string()
-          .min(1, {message: 'The Product Name cannot be empty'}),
-  price: z.coerce.number({message: 'Invalid price'})
-          .min(1, {message: 'The Price must be greater than 0'}),
-  image: z.string({message: 'Image is required'}),
-  inventory: z.coerce.number({message: 'Invalid Inventory'})
-          .min(1, {message: 'The Inventory must be greater than 0'}),
-  categoryId: z.coerce.number({message: 'The Category is not valid'})
+    .min(1, { message: 'The Product Name cannot be empty' }),
+  price: z.coerce.number({ message: 'Invalid price' })
+    .min(1, { message: 'The Price must be greater than 0' }),
+  image: z.string({ message: 'Image is required' }),
+  inventory: z.coerce.number({ message: 'Invalid Inventory' })
+    .min(1, { message: 'The Inventory must be greater than 0' }),
+  categoryId: z.coerce.number({ message: 'The Category is not valid' })
 })
 
 export const CategorySchema = z.object({
@@ -36,6 +36,30 @@ export const CategoryWithProductsResponseSchema = CategorySchema.extend({
   products: z.array(ProductSchema)
 });
 
+export const CouponSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  percentage: z.coerce.number(),
+  expirationDate: z.string()
+});
+
+export const CouponsResponseApiSchema = z.array(CouponSchema);
+
+export const CouponFormSchema = z.object({
+  name: z.string()
+    .min(1, { message: 'The Coupon Name cannot be empty' }),
+  percentage: z.string()
+    .min(1, { message: 'The percentage is required' })
+    .transform(Number)
+    .pipe(
+      z.number()
+        .min(0, { message: 'The percentage cannot be negative' })
+        .max(100, { message: 'The percentage cannot be greater than 100' })
+    ),
+  expirationDate: z.string()
+    .min(1, { message: 'The date is required' })
+});
+
 /** Shopping Cart */
 const ContentsShoppingCartSchema = ProductSchema.pick({
   name: true,
@@ -47,7 +71,7 @@ const ContentsShoppingCartSchema = ProductSchema.pick({
   quantity: z.number()
 });
 
-export const CounponResponseSchema = z.object({
+export const CouponValidationResponseSchema = z.object({
   name: z.string().default(''),
   message: z.string(),
   percentage: z.coerce.number().max(100).min(0).default(0),
@@ -99,5 +123,6 @@ export const TransactionsResponseSchema = z.array(TransactionResponseSchema);
 export type Product = z.infer<typeof ProductSchema>;
 export type ShoppingCart = z.infer<typeof ShoppingCartSchema>;
 export type CartItem = z.infer<typeof ContentsShoppingCartSchema>;
-export type Coupon = z.infer<typeof CounponResponseSchema>;
+export type Coupon = z.infer<typeof CouponSchema>;
+export type CouponValidation = z.infer<typeof CouponValidationResponseSchema>;
 export type Transaction = z.infer<typeof TransactionResponseSchema>;
