@@ -1,10 +1,13 @@
 "use client"
 
 import { updateCoupon } from "@/actions/update-coupon-action";
+import { useParams } from "next/navigation";
 import { ReactNode, useActionState } from "react";
 
 export default function EditCouponForm({ children }: { children: ReactNode }) {
-    const [state, dispatch] = useActionState(updateCoupon, {
+    const { id } = useParams<{id: string}>();
+    const updateCouponWithId = updateCoupon.bind(null, +id);
+    const [state, dispatch] = useActionState(updateCouponWithId, {
         errors: [],
         success: ''
     });

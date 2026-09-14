@@ -5,8 +5,9 @@ type ActionStateType = {
     success: string
 };
 
-export async function updateCoupon(prevState: ActionStateType, formData: FormData){
+export async function updateCoupon(couponId: number, prevState: ActionStateType, formData: FormData){
     console.log('desde update coupon');
+    console.log(couponId);
 
     return {
         errors: [],
