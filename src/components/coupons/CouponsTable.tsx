@@ -1,5 +1,6 @@
 import { Coupon } from "@/src/schemas/schemas";
 import Link from "next/link";
+import DeleteCouponForm from "./DeleteCouponForm";
 
 export default function CouponsTable({ coupons }: { coupons: Coupon[] }) {
   return (
@@ -51,12 +52,7 @@ export default function CouponsTable({ coupons }: { coupons: Coupon[] }) {
                           Editar <span className="sr-only">, {coupon.name}</span>
                         </Link>
 
-                        <form>
-                          <input
-                            type="submit"
-                            className="text-red-600 hover:text-red-800 cursor-pointer"
-                            value="Eliminar" />
-                        </form>
+                        <DeleteCouponForm />
                       </div>
                     </td>
                   </tr>
