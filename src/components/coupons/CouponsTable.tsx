@@ -52,7 +52,7 @@ export default function CouponsTable({ coupons }: { coupons: Coupon[] }) {
                           Editar <span className="sr-only">, {coupon.name}</span>
                         </Link>
 
-                        <DeleteCouponForm />
+                        <DeleteCouponForm couponId={coupon.id} />
                       </div>
                     </td>
                   </tr>

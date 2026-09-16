@@ -1,6 +1,7 @@
+import { Coupon } from "@/src/schemas/schemas";
 
 
-export default function DeleteCouponForm() {
+export default function DeleteCouponForm({couponId}: {couponId: Coupon['id']}) {
     return (
         <>
             <form>
